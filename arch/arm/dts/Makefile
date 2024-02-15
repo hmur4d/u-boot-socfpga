@@ -384,6 +384,9 @@ dtb-$(CONFIG_ARCH_SOCFPGA) +=				\
 	socfpga_agilex_socdk_qspi.dtb			\
 	socfpga_arria5_secu1.dtb			\
 	socfpga_arria5_socdk.dtb			\
+	socfpga_arria10_achilles_v2_indus.dtb		\
+	socfpga_arria10_achilles_v2_turbo.dtb		\
+	socfpga_arria10_achilles_v2_lite.dtb		\
 	socfpga_arria10_socdk_nand.dtb			\
 	socfpga_arria10_socdk_qspi.dtb			\
 	socfpga_arria10_socdk_sdmmc.dtb			\

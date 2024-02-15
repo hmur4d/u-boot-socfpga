@@ -1,0 +1,6 @@
+SOCFPGA BOARD
+M:	Dan Negvesky <dnegvesky@reflexces.com>
+S:	Maintained
+F:	board/reflexces/achilles-v2-lite/
+F:	include/configs/socfpga_arria10_achilles_v2_lite.h
+F:	configs/socfpga_arria10_achilles_v2_lite_defconfig

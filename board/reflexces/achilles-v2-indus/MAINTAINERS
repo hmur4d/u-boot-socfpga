@@ -1,0 +1,6 @@
+SOCFPGA BOARD
+M:	Dan Negvesky <dnegvesky@reflexces.com>
+S:	Maintained
+F:	board/reflexces/achilles-v2-indus/
+F:	include/configs/socfpga_arria10_achilles_v2_indus.h
+F:	configs/socfpga_arria10_achilles_v2_indus_defconfig

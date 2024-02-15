@@ -1,0 +1,157 @@
+/*
+ * Copyright (C) 2021 REFLEX CES <www.reflexces.com>
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
+
+#include "socfpga_arria10.dtsi"
+#include "socfpga_arria10_achilles-u-boot.dtsi"
+
+/ {
+	compatible = "altr,socfpga-arria10", "altr,socfpga";
+	chassis-type = "embedded";
+
+	aliases {
+		ethernet0 = &gmac1;
+		ethernet1 = &gmac2;
+		serial0 = &uart0;
+	};
+
+	chosen {
+		bootargs = "earlyprintk";
+		stdout-path = "serial0:115200n8";
+	};
+
+	soc {
+		clkmgr@ffd04000 {
+			clocks {
+				osc1 {
+					clock-frequency = <25000000>;
+				};
+			};
+		};
+	};
+};
+
+&mmc {
+	status = "okay";
+	cap-sd-highspeed;
+	cap-mmc-highspeed;
+	broken-cd;
+	bus-width = <8>;
+};
+
+&eccmgr {
+	sdmmca-ecc@ff8c2c00 {
+		compatible = "altr,socfpga-sdmmc-ecc";
+		reg = <0xff8c2c00 0x400>;
+		altr,ecc-parent = <&mmc>;
+		interrupts = <15 IRQ_TYPE_LEVEL_HIGH>,
+				     <47 IRQ_TYPE_LEVEL_HIGH>,
+				     <16 IRQ_TYPE_LEVEL_HIGH>,
+				     <48 IRQ_TYPE_LEVEL_HIGH>;
+	};
+};
+
+&gmac1 {
+	phy-mode = "rgmii";
+	phy-addr = <0xffffffff>; /* probe for phy addr */
+
+	/*
+	 * These skews assume the user's FPGA design is adding 600ps of delay
+	 * for TX_CLK on Arria 10.
+	 *
+	 * All skews are offset since hardware skew values for the ksz9031
+	 * range from a negative skew to a positive skew.
+	 * See the micrel-ksz90x1.txt Documentation file for details.
+	 */
+	txd0-skew-ps = <0>; /* -420ps */
+	txd1-skew-ps = <0>; /* -420ps */
+	txd2-skew-ps = <0>; /* -420ps */
+	txd3-skew-ps = <0>; /* -420ps */
+	rxd0-skew-ps = <420>; /* 0ps */
+	rxd1-skew-ps = <420>; /* 0ps */
+	rxd2-skew-ps = <420>; /* 0ps */
+	rxd3-skew-ps = <420>; /* 0ps */
+	txen-skew-ps = <0>; /* -420ps */
+	txc-skew-ps = <1860>; /* 960ps */
+	rxdv-skew-ps = <420>; /* 0ps */
+	rxc-skew-ps = <1680>; /* 780ps */
+	max-frame-size = <3800>;
+	status = "okay";
+};
+
+&gmac2 {
+	phy-mode = "rgmii";
+	phy-addr = <0xffffffff>; /* probe for phy addr */
+
+	/*
+	 * These skews assume the user's FPGA design is adding 600ps of delay
+	 * for TX_CLK on Arria 10.
+	 *
+	 * All skews are offset since hardware skew values for the ksz9031
+	 * range from a negative skew to a positive skew.
+	 * See the micrel-ksz90x1.txt Documentation file for details.
+	 */
+	txd0-skew-ps = <0>; /* -420ps */
+	txd1-skew-ps = <0>; /* -420ps */
+	txd2-skew-ps = <0>; /* -420ps */
+	txd3-skew-ps = <0>; /* -420ps */
+	rxd0-skew-ps = <420>; /* 0ps */
+	rxd1-skew-ps = <420>; /* 0ps */
+	rxd2-skew-ps = <420>; /* 0ps */
+	rxd3-skew-ps = <420>; /* 0ps */
+	txen-skew-ps = <0>; /* -420ps */
+	txc-skew-ps = <1860>; /* 960ps */
+	rxdv-skew-ps = <420>; /* 0ps */
+	rxc-skew-ps = <1680>; /* 780ps */
+	max-frame-size = <3800>;
+	status = "okay";
+};
+
+&gpio2 {
+	status = "okay";
+};
+
+&i2c0 {
+	status = "okay";
+
+	speed-mode = <0>;
+	clock-frequency = <100000>;
+	i2c-sda-falling-time-ns = <500>;
+	i2c-scl-falling-time-ns = <500>;
+
+	tempsensor@48 {
+		compatible = "ti,tmp102";
+		reg = <0x48>;
+	};
+
+	rtc@51 {
+		compatible = "nxp,pcf8563";
+		reg = <0x51>;
+	};
+};
+
+&uart0 {
+	status = "okay";
+};
+
+&usb1 {
+	status = "okay";
+	disable-over-current;
+};
+
+&watchdog1 {
+	status = "okay";
+};

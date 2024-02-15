@@ -1,0 +1,30 @@
+// SPDX-License-Identifier: GPL-2.0
+/*
+ * Copyright (C) 2022 REFLEX CES <www.reflexces.com>
+ *
+ */
+
+/dts-v1/;
+
+/ {
+	description = "FIT image with FPGA core bistream";
+	#address-cells = <1>;
+
+	images {
+		fpga-core-1 {
+			description = "FPGA core bitstream";
+			data = /incbin/("../../../achilles_v2_indus_ghrd.core.rbf");
+			type = "fpga";
+			arch = "arm";
+			compression = "none";
+		};
+	};
+
+	configurations {
+		default = "config-1";
+		config-1 {
+			description = "Configure FPGA core image";
+			fpga = "fpga-core-1";
+		};
+	};
+};
