@@ -1,0 +1,227 @@
+diff -ruN a/arch/arm/include/asm/arch-socfpga_arria10/sdram.h b/arch/arm/include/asm/arch-socfpga_arria10/sdram.h
+--- a/arch/arm/include/asm/arch-socfpga_arria10/sdram.h	2019-09-04 12:24:48.824138696 +0200
++++ b/arch/arm/include/asm/arch-socfpga_arria10/sdram.h	2019-09-04 12:22:54.959152323 +0200
+@@ -306,8 +306,8 @@
+ #define ALT_ECC_HMC_OCP_ERRINTEN_SERRINTEN_SET_MSK		0x00000001
+ #define ALT_ECC_HMC_OCP_ERRINTEN_DERRINTEN_SET_MSK		0x00000002
+ #define ALT_ECC_HMC_OCP_INTMOD_INTONCMP_SET_MSK			0x00010000
+-#define ALT_ECC_HMC_OCP_INTMOD_SERR_SET_MSK			0x00000001
+-#define ALT_ECC_HMC_OCP_INTMOD_EXT_ADDRPARITY_SET_MSK		0x00000100
++#define ALT_ECC_HMC_OCP_INTMOD_SERR_SET_MSK			    0x00000001
++#define ALT_ECC_HMC_OCP_INTMOD_EXT_ADDRPARITY_SET_MSK	0x00000100
+ #define ALT_ECC_HMC_OCP_ECCCTL_AWB_CNT_RST_SET_MSK		0x00010000
+ #define ALT_ECC_HMC_OCP_ECCCTL_CNT_RST_SET_MSK			0x00000100
+ #define ALT_ECC_HMC_OCP_ECCCTL_ECC_EN_SET_MSK			0x00000001
+@@ -316,33 +316,34 @@
+ #define ALT_ECC_HMC_OCP_ERRINTEN_SERR_SET_MSK			0x00000001
+ #define ALT_ECC_HMC_OCP_ERRINTEN_DERR_SET_MSK			0x00000002
+ #define ALT_ECC_HMC_OCP_ERRINTEN_HMI_SET_MSK			0x00000004
+-#define ALT_ECC_HMC_OCP_INTSTAT_SERR_MSK			0x00000001
+-#define ALT_ECC_HMC_OCP_INTSTAT_DERR_MSK			0x00000002
+-#define ALT_ECC_HMC_OCP_INTSTAT_HMI_MSK				0x00000004
++#define ALT_ECC_HMC_OCP_INTSTAT_SERR_MSK			    0x00000001
++#define ALT_ECC_HMC_OCP_INTSTAT_DERR_MSK			    0x00000002
++#define ALT_ECC_HMC_OCP_INTSTAT_HMI_MSK				    0x00000004
+ #define ALT_ECC_HMC_OCP_INTSTAT_ADDRMTCFLG_MSK			0x00010000
+ #define ALT_ECC_HMC_OCP_INTSTAT_ADDRPARFLG_MSK			0x00020000
+ #define ALT_ECC_HMC_OCP_INTSTAT_DERRBUSFLG_MSK			0x00040000
+ 
+ #define ALT_ECC_HMC_OCP_SERRCNTREG_VALUE				8
+ 
+-#define ALT_NOC_MPU_DDR_T_SCHED_DDRTIMING_ACTTOACT_LSB	0
+-#define ALT_NOC_MPU_DDR_T_SCHED_DDRTIMING_RDTOMISS_LSB	6
+-#define ALT_NOC_MPU_DDR_T_SCHED_DDRTIMING_WRTOMISS_LSB	12
+-#define ALT_NOC_MPU_DDR_T_SCHED_DDRTIMING_BURSTLEN_LSB	18
+-#define ALT_NOC_MPU_DDR_T_SCHED_DDRTIMING_RDTOWR_LSB	21
+-#define ALT_NOC_MPU_DDR_T_SCHED_DDRTIMING_WRTORD_LSB	26
+-#define ALT_NOC_MPU_DDR_T_SCHED_DDRTIMING_BWRATIO_LSB	31
++#define ALT_NOC_MPU_DDR_T_SCHED_DDRTIMING_ACTTOACT_LSB	25
++#define ALT_NOC_MPU_DDR_T_SCHED_DDRTIMING_RDTOMISS_LSB	0
++#define ALT_NOC_MPU_DDR_T_SCHED_DDRTIMING_WRTOMISS_LSB	0
++#define ALT_NOC_MPU_DDR_T_SCHED_DDRTIMING_BURSTLEN_LSB	2
++#define ALT_NOC_MPU_DDR_T_SCHED_DDRTIMING_RDTOWR_LSB	7
++#define ALT_NOC_MPU_DDR_T_SCHED_DDRTIMING_WRTORD_LSB	17
++#define ALT_NOC_MPU_DDR_T_SCHED_DDRTIMING_BWRATIO_LSB	0
+ 
+ #define ALT_NOC_MPU_DDR_T_SCHED_DDRMOD_AUTOPRECHARGE_LSB	0
+-#define ALT_NOC_MPU_DDR_T_SCHED_DDRMOD_BWRATIOEXTENDED_LSB	1
++#define ALT_NOC_MPU_DDR_T_SCHED_DDRMOD_BWRATIOEXTENDED_LSB	0
++
++#define ALT_NOC_MPU_DDR_T_SCHED_ACTIVATE_RRD_LSB	4
++#define ALT_NOC_MPU_DDR_T_SCHED_ACTIVATE_FAW_LSB	15
++#define ALT_NOC_MPU_DDR_T_SCHED_ACTIVATE_FAWBANK_LSB	4
++
++#define ALT_NOC_MPU_DDR_T_SCHED_DEVTODEV_BUSRDTORD_LSB	4
++#define ALT_NOC_MPU_DDR_T_SCHED_DEVTODEV_BUSRDTOWR_LSB	7
++#define ALT_NOC_MPU_DDR_T_SCHED_DEVTODEV_BUSWRTORD_LSB	5
+ 
+-#define ALT_NOC_MPU_DDR_T_SCHED_ACTIVATE_RRD_LSB	0
+-#define ALT_NOC_MPU_DDR_T_SCHED_ACTIVATE_FAW_LSB	4
+-#define ALT_NOC_MPU_DDR_T_SCHED_ACTIVATE_FAWBANK_LSB	10
+-
+-#define ALT_NOC_MPU_DDR_T_SCHED_DEVTODEV_BUSRDTORD_LSB	0
+-#define ALT_NOC_MPU_DDR_T_SCHED_DEVTODEV_BUSRDTOWR_LSB	2
+-#define ALT_NOC_MPU_DDR_T_SCHED_DEVTODEV_BUSWRTORD_LSB	4
+ 
+ #define ALT_NOC_FW_DDR_END_ADDR_LSB	16
+ #define ALT_NOC_FW_DDR_ADDR_MASK	0xFFFF
+diff -ruN a/configs/socfpga_arria10_rxc_defconfig b/configs/socfpga_arria10_rxc_defconfig
+--- a/configs/socfpga_arria10_rxc_defconfig	1970-01-01 01:00:00.000000000 +0100
++++ b/configs/socfpga_arria10_rxc_defconfig	2019-09-04 11:42:14.526360958 +0200
+@@ -0,0 +1,8 @@
+++S:CONFIG_ARM=y
+++S:CONFIG_TARGET_SOCFPGA_ARRIA10=y
++CONFIG_OF_CONTROL=y
++CONFIG_DEFAULT_DEVICE_TREE="socfpga_arria10"
++CONFIG_SKIP_LOWLEVEL_INIT=n
++CONFIG_CADENCE_QSPI=n
++CONFIG_MMC=y
++CONFIG_NET=y
+diff -ruN a/include/configs/socfpga_arria10.h b/include/configs/socfpga_arria10.h
+--- a/include/configs/socfpga_arria10.h	2019-09-04 12:24:49.128141327 +0200
++++ b/include/configs/socfpga_arria10.h	2019-09-04 11:42:14.526360958 +0200
+@@ -13,6 +13,20 @@
+ #include <config_cmd_default.h>
+ #include <generated/autoconf.h>
+ 
++/* *************************************************** */
++/*
++ * Reflex CES CONFIG
++ *
++ */
++#define RXC_CONFIG_BOOTCOMMAND
++#define CONFIG_RXC_BOARD "Lite"
++#define RXC_CONFIG_BOOT_FROM_MMC
++/*#define RXC_CONFIG_BOOT_FROM_NET*/
++/*#define RXC_CONFIG_BOOT_HYBRID*/
++#define CONFIG_BOOTP_SERVERIP
++/* *************************************************** */
++
++
+ #define CONFIG_SOCFPGA_ARRIA10
+ #define CONFIG_SOCFPGA_COMMON 1
+ /* Undef to increase boot performance, if you want checksum
+@@ -112,10 +126,10 @@
+  * Console setup
+  */
+ /* Monitor Command Prompt */
+-#define CONFIG_SYS_PROMPT		"SOCFPGA_ARRIA10 # "
++#define CONFIG_SYS_PROMPT		"RxC_SoMA10_" CONFIG_RXC_BOARD" # "
+ 
+ /* EMAC controller and PHY used */
+-#define CONFIG_EMAC_BASE		SOCFPGA_EMAC0_ADDRESS
++#define CONFIG_EMAC_BASE		SOCFPGA_EMAC1_ADDRESS
+ #define CONFIG_EPHY_PHY_ADDR		CONFIG_EPHY0_PHY_ADDR
+ #define CONFIG_PHY_INTERFACE_MODE	PHY_INTERFACE_MODE_RGMII
+ 
+@@ -214,6 +228,17 @@
+  */
+ #ifdef CONFIG_SEMIHOSTING
+ #define CONFIG_BOOTCOMMAND ""
++#elif defined(RXC_CONFIG_BOOTCOMMAND)
++	#define CONFIG_LINUX_DTB_NAME linuxDT.dtb
++	#ifdef RXC_CONFIG_BOOT_FROM_NET
++	#define CONFIG_BOOTCOMMAND "run rxcprebootcmd; run rxcethload; run rxcethboot"
++	#elif defined(RXC_CONFIG_BOOT_FROM_MMC)
++	#define CONFIG_BOOTCOMMAND "run rxcprebootcmd; run rxcmmcload; run rxcmmcboot"
++	#elif defined(RXC_CONFIG_BOOT_HYBRID)
++	#define CONFIG_BOOTCOMMAND "run rxcprebootcmd;run rxcethload; run rxcmmcboot"
++	#else
++	#define CONFIG_BOOTCOMMAND ""
++	#endif
+ #elif defined(CONFIG_MMC)
+ #define CONFIG_BOOTCOMMAND " run core_rbf_prog; run callscript; run mmcload;" \
+ 	"run set_initswstate; run mmcboot"
+@@ -246,14 +271,16 @@
+ 	"verify=y\0" \
+ 	"loadaddr=" __stringify(CONFIG_SYS_LOAD_ADDR) "\0" \
+ 	"fdtaddr=" __stringify(CONFIG_SYS_DTB_ADDR) "\0" \
++	"tftppath=SomA10-V2\/" CONFIG_RXC_BOARD "\/\0"	 \
++	"autoload=no\0" \
+ 	"bootimage=zImage\0" \
+ 	"bootimagesize=0x5F0000\0" \
+ 	"fdtimage=" __stringify(CONFIG_LINUX_DTB_NAME) "\0" \
+ 	"fdtimagesize=" __stringify(MAX_DTB_SIZE_IN_RAM) "\0" \
+ 	"fdt_high=0x2000000\0" \
+ 	"mmcloadcmd=fatload\0" \
+-	"mmcloadpart=1\0" \
+-	"mmcroot=/dev/mmcblk0p2\0" \
++	"mmcloadpart=2\0" \
++	"mmcroot=/dev/mmcblk0p3\0" \
+ 	"qspi_upage_cs=2\0" \
+ 	"qspiloadcs=0\0" \
+ 	"qspibootimageaddr=0x120000\0" \
+@@ -287,6 +314,18 @@
+ 		" root=${qspiroot} rw rootfstype=${qspirootfstype};" \
+ 		"fpgabr 1;" \
+ 		"bootz ${loadaddr} - ${fdtaddr}\0" \
++	"rxcethload=dhcp;tftp ${loadaddr} ${tftppath}${bootimage} ; " \
++		"tftp ${fdtaddr} ${tftppath}${fdtimage} ;\0" \
++	"rxcethboot=setenv bootargs " CONFIG_BOOTARGS \
++		" ip=dhcp root=/dev/nfs rw rootwait nfsroot=${serverip}:/tftpboot/linaro-rootfs,nolock,rsize=4096,wsize=4096;"\
++		"bootz ${loadaddr} - ${fdtaddr}\0" \
++	"rxcmmcload=mmc rescan;" \
++		"${mmcloadcmd} mmc 0:${mmcloadpart} ${loadaddr} ${bootimage};"\
++		"${mmcloadcmd} mmc 0:${mmcloadpart} ${fdtaddr} ${fdtimage}\0" \
++	"rxcmmcboot=setenv bootargs " CONFIG_BOOTARGS \
++		" root=${mmcroot} ext3 rw rootwait vmalloc=512M; fpgabr 1; " \
++		"bootz ${loadaddr} - ${fdtaddr}\0" \
++	"rxcprebootcmd= fpgabr 1; mw ff200088 0;\0" \
+ 	"nandload=" \
+ 		"nand read ${loadaddr} ${nandbootimageaddr} ${bootimagesize};" \
+ 		"nand read ${fdtaddr} ${nandfdtaddr} ${fdtimagesize}\0" \
+@@ -323,7 +362,10 @@
+ 		"else" \
+ 			"echo Optional boot script not found." \
+ 			"Continuing to boot normally;" \
+-		"fi;\0"
++		"fi;\0" \
++	"ethaddr=00:07:ed:00:64:04\0" \
++	"ipaddr=192.168.1.155\0" \
++	"serverip=192.168.1.200\0" \
+ 
+ /*
+  * Environment setup
+@@ -380,7 +422,7 @@
+ /* SDRAM Bank #1 */
+ #define CONFIG_SYS_SDRAM_BASE		0x00000000
+ /* Current emulator using 32MB */
+-#define PHYS_SDRAM_1_SIZE		0x2000000
++#define PHYS_SDRAM_1_SIZE		0xC0000000
+ /* SDRAM Bank #1 base address */
+ #define PHYS_SDRAM_1			CONFIG_SYS_SDRAM_BASE
+ /* U-Boot memtest setup */
+@@ -428,11 +470,15 @@
+  * This is default UART base address, but it can be changed through
+  * set_serial_port() during run time
+  */
+-#define CONFIG_SYS_NS16550_COM1		SOCFPGA_UART1_ADDRESS
++#define CONFIG_SYS_NS16550_COM1		SOCFPGA_UART0_ADDRESS
+ #define CONFIG_SYS_BAUDRATE_TABLE {4800, 9600, 19200, 38400, 57600, 115200}
+ #define CONFIG_SYS_NS16550_CLK		(cm_l4_sp_clk_hz)
+ 
+ #define CONFIG_BAUDRATE			115200
++
++#define CONFIG_DEBUG_SERIAL
++#define CONFIG_DEBUG_EARLY_SERIAL
++
+ #endif /* CONFIG_SYS_NS16550 */
+ 
+ /*
+@@ -487,6 +533,7 @@
+ #define CONFIG_CMD_DHCP
+ #define CONFIG_CMD_NET
+ #define CONFIG_CMD_PING
++#define CONFIG_CMD_NFS
+ /* designware */
+ #define CONFIG_NET_MULTI
+ #define CONFIG_DW_ALTDESCRIPTOR
+@@ -537,7 +584,7 @@
+ #define CONFIG_SOCFPGA_DWMMC_FIFO_DEPTH	1024
+ /* using smaller max blk cnt to avoid flooding the limited stack we have */
+ #define CONFIG_SOCFPGA_DWMMC_BUS_HZ	CONFIG_HPS_CLK_SDMMC_HZ
+-#define CONFIG_SOCFPGA_DWMMC_BUS_WIDTH	4
++#define CONFIG_SOCFPGA_DWMMC_BUS_WIDTH	8
+ /* requird for dw_mmc driver */
+ #define CONFIG_BOUNCE_BUFFER
+ #define CONFIG_BOOT_FLASH_TYPE "mmc"
